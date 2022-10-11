@@ -1,9 +1,7 @@
-import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 
 import responses from '../../helpers/responses.js';
 import userSchema from '../../schemas/user/createUser.schema.js';
-import generateAccessAndRefreshToken from './../../helpers/generateToken.js';
 
 const createUser = async (req, res, next) => {
     try {
@@ -20,25 +18,11 @@ const createUser = async (req, res, next) => {
         });
         if (error) return responses.badRequest(res, error.details[0].message);
 
-        const { password, ...userData } = value;
-        const hashedPassword = await bcrypt.hash(password, 10);
-
         const createdUser = await prisma.user.create({
-            data: {
-                ...userData,
-                password: hashedPassword,
-            },
+            data: value,
         });
 
-        const { accessToken, refreshToken } = generateAccessAndRefreshToken(
-            createdUser.id
-        );
-
-        return responses.created(res, 'User created successfully', {
-            ...createdUser,
-            accessToken,
-            refreshToken,
-        });
+        return responses.created(res, 'User created successfully', createdUser);
     } catch (err) {
         next(err);
     }
