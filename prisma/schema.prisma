@@ -29,7 +29,7 @@ model User {
 model InvalidJWT {
   id Int @id @default(autoincrement())
   jwt String @db.VarChar(255)
-  exp Int
+  exp DateTime
 }
 
 model Room {

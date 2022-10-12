@@ -5,7 +5,11 @@ const roomRouter = Router();
 
 roomRouter.get('/', roomService.getAllRooms); // * Done
 roomRouter.get('/:id', roomService.getRoomById); // * Done
+
 roomRouter.post('/', roomService.createRoom); // * Done
+roomRouter.post('/reserve', roomService.reserveRoom); // * Done
+roomRouter.post('/checkout/:id', roomService.checkOut); // * Done
+
 roomRouter.put('/:id', roomService.updateRoom); // * Done
 roomRouter.delete('/:id', roomService.deleteRoom); // * Done
 

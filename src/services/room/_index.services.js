@@ -1,7 +1,9 @@
+import checkOut from './checkOutRoom.service.js';
 import createRoom from './createRoom.service.js';
 import deleteRoom from './deleteRoom.service.js';
 import getAllRooms from './getAllRooms.service.js';
 import getRoomById from './getRoomById.service.js';
+import reserveRoom from './reserveRoom.service.js';
 import updateRoom from './UpdateRoom.service.js';
 
 const roomService = {
@@ -10,5 +12,7 @@ const roomService = {
     createRoom,
     updateRoom,
     deleteRoom,
+    reserveRoom,
+    checkOut,
 };
 export default roomService;
